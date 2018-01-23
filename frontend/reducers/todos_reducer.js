@@ -18,10 +18,11 @@ const initialState = {
 };
 
 const todosReducer = (state = initialState, action) => {
+  // console.log(state);
+  const newState = {};
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_TODOS:
-      const newState = {};
       action.todos.forEach( (todo) => {
         newState[todo.id] = todo;
       });
@@ -34,7 +35,9 @@ const todosReducer = (state = initialState, action) => {
       return lodash.merge({}, state, obj);
 
     case REMOVE_TODO:
-
+      lodash.merge(newState, state);
+      delete newState[action.id];
+      return newState;
 
     default:
       return state;

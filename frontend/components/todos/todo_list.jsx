@@ -5,12 +5,13 @@ import {uniqueId} from '../../util/util';
 // import {receiveTodo} from '../../actions/todo_actions';
 
 const TodoList = (props) => {
-  console.log(props.todos);
   return (
     <div>
       <ul>
         {props.todos.map( (el, idx) => (
-          <TodoListItem key={idx} title={el.title}/>
+          <TodoListItem id={el.id} done={el.done} key={idx}
+            title={el.title} body={el.body}
+            removeTodo={props.removeTodo} />
         ))}
       </ul>
       <TodoForm receiveTodo={props.receiveTodo}/>

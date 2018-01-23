@@ -1,7 +1,49 @@
 import React from 'react';
+import TodoDetailView from './todo_detail_view';
 
-const TodoListItem = ({ title }) => (
-  <li>{title}</li>
-);
+class TodoListItem extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = { done: props.done, detail: false };
+
+    this.handleButton = this.handleButton.bind(this);
+    this.openDetail = this.openDetail.bind(this);
+  }
+
+  render () {
+    const {title, id, removeTodo} = this.props;
+    const {done} = this.state;
+    let buttonTxt;
+    if (done) {
+      buttonTxt = "Undo";
+    } else {
+      buttonTxt = "Done";
+    }
+    return (
+      <div>
+        <li>
+          <h3 onClick={this.openDetail} >{title}</h3>
+          <button onClick={this.handleButton}>{buttonTxt}</button>
+          {this.state.detail &&
+            <TodoDetailView {...this.props}/>
+          }
+
+        </li>
+      </div>
+  );
+  }
+
+  openDetail (e) {
+    e.preventDefault();
+    this.setState({detail: !this.state.detail});
+  }
+
+  handleButton (e) {
+    e.preventDefault();
+    this.setState({ done: !this.state.done});
+
+  }
+}
+
 
 export default TodoListItem;

@@ -14,8 +14,6 @@ class TodoForm extends React.Component {
   }
 
   submitHandler (e) {
-    console.log("local state");
-    console.log(this.state);
     e.preventDefault();
     this.props.receiveTodo(this.state);
   }
@@ -39,7 +37,7 @@ class TodoForm extends React.Component {
         </label>
         <br />
         <label>Body:
-          <textarea onChange={this.handleChangeBody} value={body} />
+          <textarea onChange={this.handleChangeBody} value={body} rows="15" cols="80" />
         </label>
         <br />
         <input type="submit" value="Create Todo!" />
